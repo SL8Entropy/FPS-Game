@@ -1145,15 +1145,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc6d6dc8d8611394c99c4ae562db0d6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dashVelocity: {x: 0, y: 0, z: 0}
   isGrounded: 0
-  Dashing: 0
   dashSpeed: 500
   speed: 5
   Gravity: -9.8
   jumpHeight: 1.5
   secJump: 1
   dashStun: 0
-  dashStunTime: 1.5
+  dashStunTime: 1.25
   dashTime: 0
 --- !u!114 &1074004381646405162
 MonoBehaviour:

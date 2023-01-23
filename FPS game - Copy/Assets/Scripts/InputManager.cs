@@ -33,8 +33,12 @@ public class InputManager : MonoBehaviour
     }
     void LateUpdate()
     {
-        //look funcyion
-        look.ProcessLook(onFoot.Look.ReadValue<Vector2>());
+        //look function
+        if (motor.dashVelocity == Vector3.zero)
+        {
+            look.ProcessLook(onFoot.Look.ReadValue<Vector2>());
+
+        }
 
 
 
