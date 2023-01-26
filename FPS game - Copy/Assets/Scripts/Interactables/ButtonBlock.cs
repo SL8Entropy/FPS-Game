@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class ButtonBlock : Interactable
 {
+    [SerializeField]
+    private GameObject MoveCube;
+    private bool MoveCubeUp;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +22,7 @@ public class ButtonBlock : Interactable
     //this function is where we will design our interaction using code.
     protected override void Interact()
     {
-        Debug.Log("Interacted with" + gameObject.name);
+        MoveCubeUp = !MoveCubeUp;
+        MoveCube.GetComponent<Animator>().SetBool("cubeUp", MoveCubeUp);
     }
 }
