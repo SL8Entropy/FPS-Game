@@ -69,46 +69,17 @@ public class PlayerMotor : MonoBehaviour
 
         playerVelocity.y += Gravity * Time.deltaTime;
 
-        if (dashInvertibleY == 0)
+        
+        if (dashVelocity != Vector3.zero)
         {
-
-        }
-        else if (dashInvertibleY == 1)
-        {
-            dashVelocity.z -= 100 * Time.deltaTime;
-            if (dashVelocity.z <= 0)
+            dashVelocity.z -= 100 * dashInvertibleY * Time.deltaTime;
+            dashVelocity.x -= 100 * dashInvertibleX * Time.deltaTime;
+            if (dashVelocity.z * dashInvertibleY <= 0)
             {
                 dashVelocity.z = 0;
                 dashInvertibleY = 0;
             }
-        }
-        else if (dashInvertibleY == -1)
-        {
-            dashVelocity.z += 100 * Time.deltaTime;
-            if (dashVelocity.z >= 0)
-            {
-                dashVelocity.z = 0;
-                dashInvertibleY = 0;
-            }
-        }
-        if (dashInvertibleX == 0)
-        {
-
-        }
-
-        else if (dashInvertibleX == 1)
-        {
-            dashVelocity.x -= 100 * Time.deltaTime;
-            if (dashVelocity.x <= 0)
-            {
-                dashVelocity.x = 0;
-                dashInvertibleX = 0;
-            }
-        }
-        else if (dashInvertibleX == -1)
-        {
-            dashVelocity.x += 100 * Time.deltaTime;
-            if (dashVelocity.x >= 0)
+            if (dashVelocity.x * dashInvertibleX <= 0)
             {
                 dashVelocity.x = 0;
                 dashInvertibleX = 0;
