@@ -5,16 +5,31 @@ using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
+    
     private float health;
-    private float lerpTimer;
+    private float mana;
+    private float healthLerpTimer;
+    private float manaLerpTimer;
+    [Header("Health Bar")]
     public float maxHealth = 100f;
+    public float maxMana = 100f;
     public float chipSpeed = 2f;
     public Image frontHealthBar;
     public Image backHealthBar;
+    public Image frontManaBar;
+
+    [Header("Damage Overlay")]
+    public Image overlay;
+    public float duration;
+    public float fadeSpeed;
+    private float durationTimer;
+
     // Start is called before the first frame update
     void Start()
     {
         health = maxHealth;
+        mana = maxMana;
+        overlay.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 0);
     }
 
     // Update is called once per frame
@@ -22,46 +37,79 @@ public class PlayerHealth : MonoBehaviour
     {
         health = Mathf.Clamp(health, 0, maxHealth);
         UpdateHealthUI();
-        if (Input.GetKeyDown(KeyCode.T))
+
+        if (overlay.color.a > 0)
         {
-            TakeDamage(Random.Range(5, 10));
-        }
-        if (Input.GetKeyDown(KeyCode.Y))
-        {
-            TakeDamage(Random.Range(-5, -10));
+            if (health < 30)
+            {
+                return;
+            }
+            durationTimer += Time.deltaTime;
+            if (durationTimer > duration)
+            {
+                //fade the image
+                float tempAlpha = overlay.color.a;
+                tempAlpha -= Time.deltaTime* fadeSpeed;
+                overlay.color = new Color(overlay.color.r,overlay.color.g, overlay.color.b, tempAlpha);
+            }
         }
     }
 
     public void UpdateHealthUI()
     {
         Debug.Log(health);
-        float fillF = frontHealthBar.fillAmount;
-        float fillB = backHealthBar.fillAmount;
+        float fillHF = frontHealthBar.fillAmount;
+        float fillHB = backHealthBar.fillAmount;
+
+        float fillMF = frontManaBar.fillAmount;
         float hFraction = health / maxHealth;
-        if (fillB > hFraction)
+        float mFraction = mana / maxMana;
+        if (fillHB > hFraction)
         {
             frontHealthBar.fillAmount = hFraction;
             backHealthBar.color = Color.red;
-            lerpTimer += Time.deltaTime;
-            float percentComplete = lerpTimer / chipSpeed;
+            healthLerpTimer += Time.deltaTime;
+            float percentComplete = healthLerpTimer / chipSpeed;
             percentComplete = percentComplete * percentComplete;
-            backHealthBar.fillAmount = Mathf.Lerp(fillB, hFraction, percentComplete);
+            backHealthBar.fillAmount = Mathf.Lerp(fillHB, hFraction, percentComplete);
         }
-        if (fillF < hFraction)
+        else if (fillHF < hFraction)
         {
             backHealthBar.fillAmount = hFraction;
             backHealthBar.color = Color.green;
-            lerpTimer += Time.deltaTime;
-            float percentComplete = lerpTimer / chipSpeed;
+            healthLerpTimer += Time.deltaTime;
+            float percentComplete = healthLerpTimer / chipSpeed;
+            frontHealthBar.fillAmount = Mathf.Lerp(fillHF, backHealthBar.fillAmount, percentComplete);
+        }
+
+        if (fillMF != mFraction)
+        {
+            manaLerpTimer += Time.deltaTime;
+            float percentComplete = manaLerpTimer / chipSpeed;
             percentComplete = percentComplete * percentComplete;
-            frontHealthBar.fillAmount = Mathf.Lerp(fillF, backHealthBar.fillAmount, percentComplete);
+            frontManaBar.fillAmount = Mathf.Lerp(fillMF, mFraction, manaLerpTimer);
         }
     }
 
     public void TakeDamage(float damage)
     {
         health -= damage;
-        lerpTimer = 0f;
+        healthLerpTimer = 0f;
+        durationTimer = 0;
+        if (damage > 0)
+        {
+            overlay.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 1);
+        }
+        else if (damage < 0)
+        {
+            overlay.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 0);
+        }
     }
-    
+
+    public void UseMana(float manaUsed)
+    {
+        mana -= manaUsed;
+        manaLerpTimer = 0f;
+    }
+
 }
