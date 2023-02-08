@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2432039422043880048
+--- !u!1 &6112472162185127396
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,11 +8,12 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2432039422044134170}
-  - component: {fileID: 2432039422042721560}
-  - component: {fileID: 2432039422041858254}
-  - component: {fileID: 2432039422043691934}
-  - component: {fileID: 2432039422041858241}
+  - component: {fileID: 6112472162185381006}
+  - component: {fileID: 6112472162188366476}
+  - component: {fileID: 6112472162187411290}
+  - component: {fileID: 6112472162185036810}
+  - component: {fileID: 8436240406280789916}
+  - component: {fileID: 8436240406280789915}
   m_Layer: 0
   m_Name: Enemy Projectile1
   m_TagString: Untagged
@@ -20,36 +21,36 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2432039422044134170
+--- !u!4 &6112472162185381006
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2432039422043880048}
+  m_GameObject: {fileID: 6112472162185127396}
   m_LocalRotation: {x: 0.000000115202326, y: 0.7071068, z: 0.7071068, w: -0.000000115202326}
-  m_LocalPosition: {x: 9.38, y: 0.44, z: 4.12}
+  m_LocalPosition: {x: 6.9, y: 1.1, z: 3.6216888}
   m_LocalScale: {x: 8.1948, y: 8.1948, z: 8.1948}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &2432039422042721560
+--- !u!33 &6112472162188366476
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2432039422043880048}
+  m_GameObject: {fileID: 6112472162185127396}
   m_Mesh: {fileID: 4300188, guid: 7374575f12d49ba459e91009f7a9ec62, type: 3}
---- !u!23 &2432039422041858254
+--- !u!23 &6112472162187411290
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2432039422043880048}
+  m_GameObject: {fileID: 6112472162185127396}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -85,14 +86,14 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!96 &2432039422043691934
+--- !u!96 &6112472162185036810
 TrailRenderer:
   serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2432039422043880048}
+  m_GameObject: {fileID: 6112472162185127396}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -193,23 +194,33 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
---- !u!114 &2432039422041858241
+--- !u!65 &8436240406280789916
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6112472162185127396}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.1364985, y: 0.15034893, z: 0.15223034}
+  m_Center: {x: -7.6232965e-21, y: 0.00000016391279, z: -3.1974423e-14}
+--- !u!114 &8436240406280789915
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2432039422043880048}
+  m_GameObject: {fileID: 6112472162185127396}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce9442d78bf1c3f46b34153f9d9cfc3e, type: 3}
+  m_Script: {fileID: 11500000, guid: 47fc88cb99f84e44087a70c86105f4e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootAt: {x: 0, y: 0, z: 0}
-  damage: 0
-  target:
-    serializedVersion: 2
-    m_Bits: 0
-  blockers:
-    serializedVersion: 2
-    m_Bits: 0
+  damage: 5
+  player: {fileID: 0}
+  projectileSpeed: 0.001
+  targetPosition: {x: -0.00000333786, y: 0.000000834465, z: -0.00000047683716}
+  projectileDir: {x: 0, y: 0, z: 0}
