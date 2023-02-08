@@ -477,7 +477,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1074004381646405178}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PlayerHealth, Assembly-CSharp
         m_MethodName: TakeDamage
         m_Mode: 4
@@ -769,7 +769,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &720749986
 GameObject:
@@ -885,6 +885,7 @@ MonoBehaviour:
   useEvents: 1
   promptMessage: Use ButtonBlock
   MoveCube: {fileID: 912055056}
+  MoveCubeUp: 0
 --- !u!114 &720749992
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1045,7 +1046,7 @@ GameObject:
   - component: {fileID: 912055061}
   - component: {fileID: 912055063}
   - component: {fileID: 912055062}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Moving Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1165,7 +1166,7 @@ MonoBehaviour:
   OnInteract:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1074004381646405178}
+      - m_Target: {fileID: 1007503957}
         m_TargetAssemblyTypeName: PlayerHealth, Assembly-CSharp
         m_MethodName: TakeDamage
         m_Mode: 4
@@ -1173,7 +1174,7 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: -15
+          m_FloatArgument: -10
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -1459,6 +1460,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1007385710}
   m_CullTransparentMesh: 1
+--- !u!114 &1007503957 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8699389429750722824, guid: 997b95dc9a1d2ae46af917252decbe0e, type: 3}
+  m_PrefabInstance: {fileID: 7413006448100042717}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98471ce1b6135e34896a8d08c8a7f12c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1033362941
 GameObject:
   m_ObjectHideFlags: 0
@@ -1728,7 +1740,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2432039422044134170, guid: 351ea0de93072cd419d86ea83e1a0c04, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2432039422044134170, guid: 351ea0de93072cd419d86ea83e1a0c04, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1947,17 +1959,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2018304477}
   m_CullTransparentMesh: 1
---- !u!114 &1074004381646405178 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7496218892928408039, guid: 997b95dc9a1d2ae46af917252decbe0e, type: 3}
-  m_PrefabInstance: {fileID: 7413006448100042717}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98471ce1b6135e34896a8d08c8a7f12c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &7413006448100042717
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2034,6 +2035,26 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2018304479}
     - target: {fileID: 7496218892928408039, guid: 997b95dc9a1d2ae46af917252decbe0e, type: 3}
+      propertyPath: frontHealthBar
+      value: 
+      objectReference: {fileID: 301882905}
+    - target: {fileID: 8699389429750722823, guid: 997b95dc9a1d2ae46af917252decbe0e, type: 3}
+      propertyPath: promptText
+      value: 
+      objectReference: {fileID: 1007385712}
+    - target: {fileID: 8699389429750722824, guid: 997b95dc9a1d2ae46af917252decbe0e, type: 3}
+      propertyPath: overlay
+      value: 
+      objectReference: {fileID: 81307141}
+    - target: {fileID: 8699389429750722824, guid: 997b95dc9a1d2ae46af917252decbe0e, type: 3}
+      propertyPath: frontManaBar
+      value: 
+      objectReference: {fileID: 1033362943}
+    - target: {fileID: 8699389429750722824, guid: 997b95dc9a1d2ae46af917252decbe0e, type: 3}
+      propertyPath: backHealthBar
+      value: 
+      objectReference: {fileID: 2018304479}
+    - target: {fileID: 8699389429750722824, guid: 997b95dc9a1d2ae46af917252decbe0e, type: 3}
       propertyPath: frontHealthBar
       value: 
       objectReference: {fileID: 301882905}
