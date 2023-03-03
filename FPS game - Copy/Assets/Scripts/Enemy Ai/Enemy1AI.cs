@@ -7,6 +7,7 @@ public class Enemy1AI : GroundEnemyBaseScript
     public float damage;
     public float projectileSpeed;
     public GameObject projectile;
+    public float knockback;
 
 
     protected override void chasePlayer()
@@ -20,10 +21,9 @@ public class Enemy1AI : GroundEnemyBaseScript
 
         Instantiate(projectile, transform.GetChild(0).position, projectile.transform.rotation);
 
-
         projectile.GetComponent<EnemyProjectile>().damage = damage;
         projectile.GetComponent<EnemyProjectile>().projectileSpeed = projectileSpeed;
-        projectile.GetComponent<EnemyProjectile>().targetPosition = player.position;
+        projectile.GetComponent<EnemyProjectile>().knockback = knockback;
 
 
         //projectile.GetComponent<projectileScript>().projectileSpeed = projectileSpeed

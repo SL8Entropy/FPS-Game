@@ -50,11 +50,12 @@ public class GroundEnemyBaseScript : MonoBehaviour
         if (!alreadyAttacked)
         {
             //attack code here
-            Invoke(nameof(attackCode),attackTime);
+            Invoke(nameof(attackCode), attackTime);
 
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }
+        
     }
     private void ResetAttack()
     {

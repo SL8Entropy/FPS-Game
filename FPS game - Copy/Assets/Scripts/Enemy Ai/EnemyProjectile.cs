@@ -7,6 +7,7 @@ public class EnemyProjectile : MonoBehaviour
     public float damage;
     public GameObject player;
     public float projectileSpeed;
+    public float knockback;
     public Vector3 targetPosition;
     public Vector3 projectileDir;
     Collider playerColl, projectileColl;
@@ -14,25 +15,33 @@ public class EnemyProjectile : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        projectileDir = targetPosition - transform.position;
         player = GameObject.Find("Player");
+        targetPosition = player.transform.position;
+        projectileDir = (targetPosition - transform.position).normalized * projectileSpeed;
+
 
 
         playerColl = player.GetComponent<Collider>();
         projectileColl = GetComponent<Collider>();
-
+        Debug.Log(targetPosition);
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        transform.position += projectileDir.normalized * projectileSpeed * Time.deltaTime;
-        
+        transform.position += projectileDir * Time.deltaTime;
+        if (Vector3.Distance(transform.position, targetPosition) > 30)
+        {
+            Destroy(gameObject);
+        }
 
     }
     private void OnTriggerEnter(Collider other)
     {
         player.gameObject.GetComponent<PlayerHealth>().TakeDamage(damage);
+        Vector3 knockbackDirection =(player.transform.position - transform.position).normalized*knockback;
+        player.gameObject.GetComponent<PlayerMotor>().knockbackVelocity += knockbackDirection;
+
         Destroy(gameObject);
+
     }
 }

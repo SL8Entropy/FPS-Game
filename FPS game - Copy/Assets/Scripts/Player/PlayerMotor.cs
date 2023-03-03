@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMotor : MonoBehaviour
 {
-    private CharacterController controller;
+    public CharacterController controller;
     private Vector3 playerVelocity;
     public Vector3 dashVelocity;
     public bool isGrounded;
@@ -18,6 +18,7 @@ public class PlayerMotor : MonoBehaviour
     public float dashTime = 0f;
     private int dashInvertibleX = 0;
     private int dashInvertibleY = 0;
+    public Vector3 knockbackVelocity;
 
 
     private InputManager inputmanager;
@@ -64,25 +65,64 @@ public class PlayerMotor : MonoBehaviour
         controller.Move(transform.TransformDirection(moveDirection) * speed * Time.deltaTime);
         Debug.Log(dashVelocity);
         controller.Move(transform.TransformDirection(dashVelocity) * Time.deltaTime);
-
+        
 
 
         playerVelocity.y += Gravity * Time.deltaTime;
+        controller.Move(knockbackVelocity);
+        if (knockbackVelocity != Vector3.zero)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                if (knockbackVelocity[i] > 0)
+                {
+                    knockbackVelocity[i] -= 10 * Time.deltaTime;
+                    if (knockbackVelocity[i] <= 0)
+                    {
+                        knockbackVelocity[i] = 0;
+                    }
+                }
+                else if (knockbackVelocity[i] < 0)
+                {
+                    knockbackVelocity[i] += 10 * Time.deltaTime;
+                    if (knockbackVelocity[i] >= 0)
+                    {
+                        knockbackVelocity[i] = 0;
+                    }
+                }
 
-        
+                else
+                {
+
+                }
+            }
+        }
+
         if (dashVelocity != Vector3.zero)
         {
-            dashVelocity.z -= 100 * dashInvertibleY * Time.deltaTime;
-            dashVelocity.x -= 100 * dashInvertibleX * Time.deltaTime;
-            if (dashVelocity.z * dashInvertibleY <= 0)
+            for (int i = 0; i < 3; i++)
             {
-                dashVelocity.z = 0;
-                dashInvertibleY = 0;
-            }
-            if (dashVelocity.x * dashInvertibleX <= 0)
-            {
-                dashVelocity.x = 0;
-                dashInvertibleX = 0;
+                if (dashVelocity[i] > 0)
+                {
+                    dashVelocity[i] -= 100 * Time.deltaTime;
+                    if (dashVelocity[i] <= 0)
+                    {
+                        dashVelocity[i] = 0;
+                    }
+                }
+                else if (dashVelocity[i] < 0)
+                {
+                    dashVelocity[i] += 100 * Time.deltaTime;
+                    if (dashVelocity[i] >= 0)
+                    {
+                        dashVelocity[i] = 0;
+                    }
+                }
+
+                else
+                {
+
+                }
             }
         }
 
@@ -92,7 +132,8 @@ public class PlayerMotor : MonoBehaviour
         if (isGrounded && playerVelocity.y < 0)
             playerVelocity.y = -2f;
         controller.Move(playerVelocity * Time.deltaTime);
-
+        
+        
         Debug.Log(playerVelocity.y);
     }
     public void Jump()
