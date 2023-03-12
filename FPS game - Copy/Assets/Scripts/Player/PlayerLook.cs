@@ -7,9 +7,16 @@ public class PlayerLook : MonoBehaviour
     public Camera cam;
     private float xrotation = 0f;
 
-    public float xSensitivity = 30f;
-    public float ySensitivity = 30f;
+    public float xSensitivity;
+    public float ySensitivity;
+    public GameObject persist;
 
+    public void Awake()
+    {
+        persist = GameObject.Find("persistantObject");
+        xSensitivity = persist.GetComponent<persistantObject>().sensitivity;
+        ySensitivity = persist.GetComponent<persistantObject>().sensitivity;
+    }
     public void ProcessLook(Vector2 Input)
     {
         float mouseX = Input.x;

@@ -104,6 +104,9 @@ public class PlayerHealth : MonoBehaviour
         {
             overlay.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 0);
         }
+
+        
+
     }
 
     public void UseMana(float manaUsed)

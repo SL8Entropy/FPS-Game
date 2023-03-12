@@ -222,6 +222,6 @@ MonoBehaviour:
   damage: 20
   player: {fileID: 0}
   projectileSpeed: 5
-  knockback: 0.2
+  knockback: 0
   targetPosition: {x: -0.00000333786, y: 0.000000834465, z: -0.00000047683716}
   projectileDir: {x: 0, y: 0, z: 0}

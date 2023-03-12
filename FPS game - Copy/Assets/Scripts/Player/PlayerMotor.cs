@@ -19,23 +19,34 @@ public class PlayerMotor : MonoBehaviour
     private int dashInvertibleX = 0;
     private int dashInvertibleY = 0;
     public Vector3 knockbackVelocity;
-
-
+    public float stunTime;
+    public GameObject persist;
     private InputManager inputmanager;
 
     // Start is called before the first frame update
     void Start()
     {
+        
         controller = GetComponent<CharacterController>();
     }
     void Awake()
     {
+        
         inputmanager = GetComponent<InputManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        if (stunTime > 0)
+        {
+            stunTime -= Time.deltaTime;
+            if (stunTime < 0)
+            {
+                stunTime = 0;
+            }
+        }
         isGrounded = controller.isGrounded;
         if (isGrounded)
         {
@@ -62,21 +73,38 @@ public class PlayerMotor : MonoBehaviour
 
 
 
-        controller.Move(transform.TransformDirection(moveDirection) * speed * Time.deltaTime);
+        
         Debug.Log(dashVelocity);
         controller.Move(transform.TransformDirection(dashVelocity) * Time.deltaTime);
         
 
-
-        playerVelocity.y += Gravity * Time.deltaTime;
+        if (stunTime > 0)
+        {
+            if (playerVelocity.y > 0)
+            {
+                playerVelocity.y = 0;
+            }
+            playerVelocity.y += Gravity/2 * Time.deltaTime;
+        }
+        else
+        {
+            controller.Move(transform.TransformDirection(moveDirection) * speed * Time.deltaTime);
+            
+            playerVelocity.y += Gravity * Time.deltaTime;
+        }
         controller.Move(knockbackVelocity);
         if (knockbackVelocity != Vector3.zero)
         {
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i<3; i++)
             {
+                float knockbackReduction = 10;
+                if (isGrounded)
+                    knockbackReduction = 5;
+
+                
                 if (knockbackVelocity[i] > 0)
                 {
-                    knockbackVelocity[i] -= 10 * Time.deltaTime;
+                    knockbackVelocity[i] -= knockbackReduction * Time.deltaTime;
                     if (knockbackVelocity[i] <= 0)
                     {
                         knockbackVelocity[i] = 0;
@@ -84,17 +112,13 @@ public class PlayerMotor : MonoBehaviour
                 }
                 else if (knockbackVelocity[i] < 0)
                 {
-                    knockbackVelocity[i] += 10 * Time.deltaTime;
+                    knockbackVelocity[i] += knockbackReduction * Time.deltaTime;
                     if (knockbackVelocity[i] >= 0)
                     {
                         knockbackVelocity[i] = 0;
                     }
                 }
 
-                else
-                {
-
-                }
             }
         }
 
@@ -119,10 +143,7 @@ public class PlayerMotor : MonoBehaviour
                     }
                 }
 
-                else
-                {
 
-                }
             }
         }
 
